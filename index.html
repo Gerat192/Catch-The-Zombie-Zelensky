@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <main role="main" class="container">
+    <address>Made in Mykolaiv with love</address>
+    <title>Catch The Zombie Zelensky</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Catch The Zombie Zelensky</h1>
+    <h2>Game Instructions</h2>
+    <h3>Objective:</h3>
+    <p>Click on the Zombie Zelensky as many times as you can before time runs out!</p>
+    <p>score: <span id="score">0</span></p>
+    <p>>time left: <span id="time-left">30</span>s</p>
+    <p>Click the button below to start the game:</p>
+    <p> Made in Mykolaiv with love </p>
+    <button id="start-button">Start Game</button>
+    <button id="stop-button">Stop Game</button>
+    <main role="main" class="container">
+    <address>Made in Mykolaiv with love</address>
+    <score>score: <span id="score">0</span></score>
+    <time>time left: <span id="time-left">30</span>s</time>
+    animation: <span id="animation">none</span>
+    <button id="myButton">Click Me!</button>
+    <div class="game-container">
+        <h1>Catch The Zombie Zelensky</h1>
+        <div class="score-board">
+            <span>Score: <span id="score">0</span></span>
+            <span>Time Left: <span id="time-left">30</span>s</span>
+        </div>
+        <div class="game-area" id="game-area">
+            <img src="GdTnOu9WgAAr6Wt.jpeg" alt="Zombie Zelensky" id="zelensky" class="hidden">
+        </div>
+        <div class="score-board">
+            <span>score: <span id="score">0</span>
+           <span>time left: <span id="time-left">30</span>s
+        </div>
+        <button id="start-button">Start Game</button>
+        <button id="stop-button">Stop Game</button>
+        <payment a href=" https://donatello.to/AndreyGerat" target="_blank"> 
+            <img src="https://donatello.to/assets/imgs/donatello-button.png" alt="Donate with Donatello" style="height: 40px;">
+        </payment>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+    }
+    .game-container {
+        margin: 20px auto;
+        padding: 20px;
+        border: 2px solid #333;
+        background-color: #fff;
+        width: 300px;
+    }
+    .game-area {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+    #zelensky {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+    }
+    .hidden {
+        display: none;
+    }
+    .score-board {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    payment {
+        margin-top: 20px;
+        display: inline-block;
+    }
+    payment img {
+        height: 40px;
+    }
+    donatello-button {
+        height: 40px;
+    }
+    donatello-button img {
+        height: 40px;
+    }
+</style>
+<script>
+    // JavaScript code to handle game logic will go here
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval;
+    const zelensky = document.getElementById('zelensky');
+    const scoreDisplay = document.getElementById('score');
+    const timeLeftDisplay = document.getElementById('time-left');
+    const startButton = document.getElementById('start-button');
+    const gameArea = document.getElementById('game-area');
+    const myButton = document.getElementById('myButton');
+    myButton.addEventListener('click', () => {
+        alert('Button clicked!');
+    });
+    startButton.addEventListener('click', startGame);
+    zelensky.addEventListener('click', () => {
+        score++;
+        scoreDisplay.textContent = score;
+        moveZelensky();
+    });
+    function startGame() {
+        score = 0;
+        timeLeft = 30;
+        scoreDisplay.textContent = score;
+        timeLeftDisplay.textContent = timeLeft;
+        zelensky.classList.remove('hidden');
+        moveZelensky();
+        gameInterval = setInterval(() => {
+            timeLeft--;
+            timeLeftDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(gameInterval);
+                zelensky.classList.add('hidden');
+                alert(`Game Over! Your score is ${score}`);
+            }
+        }, 1000);
+    }
+    function moveZelensky() {
+        const x = Math.random() * (gameArea.clientWidth - zelensky.clientWidth);
+        const y = Math.random() * (gameArea.clientHeight - zelensky.clientHeight);
+        zelensky.style.left = `${x}px`;
+        zelensky.style.top = `${y}px`;
+    }
+    function stopGame() {
+        clearInterval(gameInterval);
+        zelensky.classList.add('hidden');
+        alert(`Game Stopped! Your score is ${score}`);
+    }
+    document.getElementById('stop-button').addEventListener('click', stopGame);
+    function updateAnimation() {
+        const animation = document.getElementById('animation');
+        animation.textContent = getComputedStyle(zelensky).animationName || 'none';
+    }
+    setInterval(updateAnimation, 1000);
+    function payment() {
+        window.open('https://donatello.to/AndreyGerat', '_blank');
+    }
+    document.querySelector('payment').addEventListener('click', payment);
+    function donatelloButton() {
+        window.open('https://donatello.to/AndreyGerat', '_blank');
+    }
+    document.querySelector('donatello-button').addEventListener('click', donatelloButton);
+    
+    </script>
+</body>
+</html>
